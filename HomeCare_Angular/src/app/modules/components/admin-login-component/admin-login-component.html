@@ -1,0 +1,94 @@
+<!-- login.component.html -->
+<div class="login-container">
+    <div class="row g-0 h-100">
+      <!-- Left Side - Login Form -->
+      <div class="col-lg-7 col-md-7 d-flex align-items-center justify-content-center">
+        <div class="login-form-wrapper">
+          <div class="login-form-content">
+            <div class="d-flex align-items-center justify-content-center flex-column w-100">
+              <h1 class="brand-title">H<span>o</span>meCare</h1>
+              <h1 class="login-subtitle ">Sign in to continue</h1>
+            </div>
+  
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+              <!-- Email Field -->
+              <div class="form-group mb-3">
+                <div class="input-group">
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email"
+                    formControlName="email"
+                    placeholder="Email"
+                    [class.is-invalid]="email?.invalid && email?.touched">
+                  <span class="input-group-text">
+                    <i class="bi bi-envelope"></i>
+                  </span>
+                </div>
+                <div *ngIf="email?.invalid && email?.touched" class="invalid-feedback d-block">
+                  <small *ngIf="email?.errors?.['required']">Email is required</small>
+                  <small *ngIf="email?.errors?.['email']">Please enter a valid email</small>
+                </div>
+              </div>
+  
+              <!-- Password Field -->
+              <div class="form-group mb-2">
+                <div class="input-group">
+                  <input 
+                    [type]="showPassword ? 'text' : 'password'" 
+                    class="form-control" 
+                    id="password"
+                    formControlName="password"
+                    placeholder="Password"
+                    [class.is-invalid]="password?.invalid && password?.touched">
+                  <span class="input-group-text cursor-pointer" (click)="togglePasswordVisibility()">
+                    <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                  </span>
+                </div>
+                <div *ngIf="password?.invalid && password?.touched" class="invalid-feedback d-block">
+                  <small *ngIf="password?.errors?.['required']">Password is required</small>
+                  <small *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters</small>
+                  <small *ngIf="password?.errors?.['maxlength']">Password must not exceed 15 characters</small>
+                  <small *ngIf="password?.errors?.['passwordStrength']">
+                    Password must include:
+                    <span *ngIf="!password?.errors?.['passwordStrength'].hasAlphabetic"> alphabetic characters,</span>
+                    <span *ngIf="!password?.errors?.['passwordStrength'].hasNumeric"> numeric characters,</span>
+                    <span *ngIf="!password?.errors?.['passwordStrength'].hasSpecialChar"> special characters</span>
+                  </small>
+                </div>
+              </div>
+  
+              <!-- Forgot Password Link -->
+              <div class="text-end mb-4">
+                <a href="javascript:void(0)" class="forgot-password-link" (click)="onForgotPassword()">
+                  Forgot Password?
+                </a>
+              </div>
+              
+              <!-- ✅ API Error Message -->
+              <div *ngIf="errorMessage" class="alert alert-danger py-2 mb-3" role="alert">
+                <small>{{ errorMessage }}</small>
+              </div>
+
+              <!-- Sign In Button -->
+              <button 
+                type="submit" 
+                class="btn btn-primary w-100 signin-btn"
+                [disabled]="isSubmitting">
+                <span *ngIf="!isSubmitting">Sign In</span>
+                <span *ngIf="isSubmitting">
+                  <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                  Signing in...
+                </span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Right Side - Decorative Pattern -->
+      <div class="col-lg-5 col-md-5 d-none d-md-block">
+        <div class="pattern-background"></div>
+      </div>
+    </div>
+  </div>

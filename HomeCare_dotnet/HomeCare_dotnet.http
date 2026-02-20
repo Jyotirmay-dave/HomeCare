@@ -1,0 +1,6 @@
+@HomeCare_dotnet_HostAddress = http://localhost:5098
+
+GET {{HomeCare_dotnet_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
