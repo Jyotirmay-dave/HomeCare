@@ -59,7 +59,7 @@ namespace HomeCare_dotnet.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(10),
+                expires: DateTime.UtcNow.AddMinutes(10),
                 signingCredentials: creds);
 
             var response = _mapper.Map<AdminDTO>(existingAdmin);

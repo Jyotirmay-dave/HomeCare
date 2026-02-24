@@ -72,6 +72,74 @@ namespace HomeCare_dotnet.Migrations
                             t.HasCheckConstraint("CK_Admins_Email", "\"Email\" LIKE '_%@_%._%'");
                         });
                 });
+
+            modelBuilder.Entity("HomeCare_dotnet.Data.OTP", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("timestamp with time zone")
+                        .HasDefaultValueSql("timezone('utc', now())");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<DateTime>("ExpiresAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsUsed")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("OtpCode")
+                        .IsRequired()
+                        .HasMaxLength(4)
+                        .HasColumnType("character varying(4)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OTPs", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_OTP_Email", "\"Email\" LIKE '_%@_%._%'");
+
+                            t.HasCheckConstraint("CK_OTP_OtpCode", "char_length(\"OtpCode\") = 4");
+                        });
+                });
+
+            modelBuilder.Entity("HomeCare_dotnet.Data.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("character varying(60)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.ToTable("Users", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Users_Email", "\"Email\" LIKE '_%@_%._%'");
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -12,5 +12,7 @@ public class AutoMapperConfig : Profile
         CreateMap<Admin, AdminCreateDTO>().ReverseMap();
         CreateMap<Admin, AdminLoginDTO>().ReverseMap();
         CreateMap<Admin, AdminDTO>().ReverseMap();
+        CreateMap<User, UserLoginDTO>().ReverseMap();
+        CreateMap<User, UserDTO>().ReverseMap();
     }
 }

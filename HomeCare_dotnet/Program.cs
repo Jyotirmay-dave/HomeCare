@@ -57,6 +57,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
 builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(ICommonRepository<>), typeof(CommonRepository<>));
 builder.Services.AddScoped<IPasswordService, PasswordService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 // JWT Authentication
 builder.Services.AddAuthentication(options => 
 {
