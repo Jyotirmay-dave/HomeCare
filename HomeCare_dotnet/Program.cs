@@ -11,7 +11,7 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add ef core with postgresql
-builder.Services.AddDbContext<HomecareContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<HomecareContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("NeonConnection")));
 
 // Add services to the container.
 builder.Services.AddCors(options => {

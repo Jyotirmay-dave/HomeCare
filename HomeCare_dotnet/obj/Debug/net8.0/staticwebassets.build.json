@@ -1,1 +1,11 @@
-{"Version":1,"Hash":"4NggfnVsSBik7meAW1j0BfFdVMwRFoACNXBKPuWfQDk=","Source":"HomeCare_dotnet","BasePath":"/","Mode":"Root","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "gM9h7DwFs85nAtoR/ZtSTmpkszCw+jJ2piYW0q9J8x8=",
+  "Source": "HomeCare_dotnet",
+  "BasePath": "_content/HomeCare_dotnet",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
