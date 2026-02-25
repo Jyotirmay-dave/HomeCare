@@ -14,14 +14,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HomecareContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngular", policy => {
         policy.WithOrigins("http://localhost:4200")
             .AllowAnyHeader().AllowAnyMethod().AllowCredentials();
     });
+    options.AddPolicy("AllowAll", policy => {
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    });
 });
+
 builder.Services.AddEndpointsApiExplorer();
+
 // Authentication in swagger as well
 builder.Services.AddSwaggerGen(options =>
 {
@@ -51,6 +55,31 @@ builder.Services.AddSwaggerGen(options =>
             new List<string>()
         }
     });
+
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "HomeCare API", Version = "v1" });
+
+    // Dynamically detect Codespace URL so you don't need to change it every time
+    var codespaceName = Environment.GetEnvironmentVariable("CODESPACE_NAME");
+    var codespacePort = "5098";
+
+    if (!string.IsNullOrEmpty(codespaceName))
+    {
+        // Running inside GitHub Codespaces
+        options.AddServer(new OpenApiServer
+        {
+            Url = $"https://{codespaceName}-{codespacePort}.app.github.dev",
+            Description = "GitHub Codespace"
+        });
+    }
+    else
+    {
+        // Running locally
+        options.AddServer(new OpenApiServer
+        {
+            Url = $"http://localhost:{codespacePort}",
+            Description = "Localhost"
+        });
+    }
 });
 
 builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
@@ -58,6 +87,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped(typeof(ICommonRepository<>), typeof(CommonRepository<>));
 builder.Services.AddScoped<IPasswordService, PasswordService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+
 // JWT Authentication
 builder.Services.AddAuthentication(options => 
 {
@@ -88,8 +118,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseCors("AllowAngular");
+// ❌ REMOVED app.UseHttpsRedirection() — this causes issues in Codespaces
+// because Codespaces handles HTTPS externally, not inside the container
+
+app.UseCors("AllowAll");
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -39,12 +39,12 @@ namespace HomeCare_dotnet.Controllers
         {
             if(!ModelState.IsValid) return BadRequest("Please provide Username and Email.");
 
-            var existingUser = await _userRepository.GetAsync(x => x.Email.ToLower().Equals(dto.Email.ToLower()));
-            if(existingUser == null)
-            {
-                User newUser = _mapper.Map<User>(dto);
-                await _userRepository.CreateAsync(newUser);
-            }
+            // var existingUser = await _userRepository.GetAsync(x => x.Email.ToLower().Equals(dto.Email.ToLower()));
+            // if(existingUser == null)
+            // {
+            //     User newUser = _mapper.Map<User>(dto);
+            //     await _userRepository.CreateAsync(newUser);
+            // }
 
             var otp = new Random().Next(1000, 9999).ToString();
             OTP newOtp = new OTP
@@ -55,7 +55,8 @@ namespace HomeCare_dotnet.Controllers
                 CreatedDate = DateTime.UtcNow
             };
 
-            await _otpRepository.CreateAsync(newOtp);
+            await _emailService.SendOtpAsync(dto.Email, otp);
+            // await _otpRepository.CreateAsync(newOtp);
             return Ok(new { message = "OTP sent to your Email." });
         }
 

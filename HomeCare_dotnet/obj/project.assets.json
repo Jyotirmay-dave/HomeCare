@@ -3190,19 +3190,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\pca114\\.nuget\\packages\\": {}
+    "/home/codespace/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\HomeCare\\HomeCare_dotnet\\HomeCare_dotnet.csproj",
+      "projectUniqueName": "/workspaces/HomeCare/HomeCare_dotnet/HomeCare_dotnet.csproj",
       "projectName": "HomeCare_dotnet",
-      "projectPath": "D:\\HomeCare\\HomeCare_dotnet\\HomeCare_dotnet.csproj",
-      "packagesPath": "C:\\Users\\pca114\\.nuget\\packages\\",
-      "outputPath": "D:\\HomeCare\\HomeCare_dotnet\\obj\\",
+      "projectPath": "/workspaces/HomeCare/HomeCare_dotnet/HomeCare_dotnet.csproj",
+      "packagesPath": "/home/codespace/.nuget/packages/",
+      "outputPath": "/workspaces/HomeCare/HomeCare_dotnet/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\pca114\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/codespace/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -3225,7 +3225,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
       "net8.0": {
@@ -3285,6 +3286,20 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[8.0.22, 8.0.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-x64",
+            "version": "[8.0.22, 8.0.22]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.22, 8.0.22]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -3293,7 +3308,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
